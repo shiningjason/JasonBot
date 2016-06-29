@@ -29,16 +29,16 @@ module.exports = new Script({
 
     speak: {
         receive: (bot, message) => {
+            function processMessage(message) {
+                if (message.indexOf('愛你') !== -1) {
+                    return '我也愛你呢！';
+                }
+                return '我家主人沒教我這個詞 GG！';
+            }
+
             return bot
-                .say(() => processMessage(message))
+                .say(processMessage(message))
                 .then(() => 'speak');
         }
     }
 });
-
-function processMessage(message) {
-    if (message.indexOf('愛你') !== -1) {
-        return '我也愛你呢！';
-    }
-    return '我家主人沒教我這個詞 GG！';
-}
