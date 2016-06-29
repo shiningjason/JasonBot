@@ -4,34 +4,41 @@ const Script = require('smooch-bot').Script;
 
 module.exports = new Script({
     processing: {
-        prompt: (bot) => bot.say('Beep boop...'),
+        prompt: (bot) => bot.say('逼波逼波...'),
         receive: () => 'processing'
     },
 
     start: {
         receive: (bot) => {
-            return bot.say('Hi! I\'m Smooch Bot!')
+            return bot
+                .say('您好，初次見面，我是 Jason 的機器人 Eason！')
                 .then(() => 'askName');
         }
     },
 
     askName: {
-        prompt: (bot) => bot.say('What\'s your name?'),
+        prompt: (bot) => bot.say('請問您叫什麼名字呢?'),
         receive: (bot, message) => {
             const name = message.text;
-            return bot.setProp('name', name)
-                .then(() => bot.say(`Great! I'll call you ${name}
-Is that OK? %[Yes](postback:yes) %[No](postback:no)`))
-                .then(() => 'finish');
+            return bot
+                .setProp('name', name)
+                .then(() => bot.say(`太棒了，很高興認識你！那我就稱呼您 ${name} 囉？ %[Y](postback:yes) %[N](postback:no)`))
+                .then(() => 'speak');
         }
     },
 
-    finish: {
+    speak: {
         receive: (bot, message) => {
-            return bot.getProp('name')
-                .then((name) => bot.say(`Sorry ${name}, my creator didn't ` +
-                        'teach me how to do anything else!'))
-                .then(() => 'finish');
+            return bot
+                .say(() => processMessage(message))
+                .then(() => 'speak');
         }
     }
 });
+
+function processMessage(message) {
+    if (message.indexOf('愛你') !== -1) {
+        return '我也愛你呢！';
+    }
+    return '我家主人沒教我這個詞 GG！';
+}
