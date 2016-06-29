@@ -1,7 +1,7 @@
 {
   "name": "JasonBot",
   "version": "0.0.0",
-  "description": "JasonBot",
+  "description": "Hello, I'm JasonBot.",
   "author": "jason Chung <shiningjason1989@gmail.com> (http://shiningjason1989.github.io/)",
   "scripts": {
     "start": "node heroku"
