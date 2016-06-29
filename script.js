@@ -30,6 +30,9 @@ module.exports = new Script({
     speak: {
         receive: (bot, message) => {
             function processMessage(message) {
+                if (message === '/version') {
+                    return 'v1';
+                }
                 if (message.indexOf('愛你') !== -1) {
                     return '我也愛你呢！';
                 }
