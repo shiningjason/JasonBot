@@ -40,7 +40,7 @@ module.exports = new Script({
             }
 
             return bot
-                .say(processMessage(message))
+                .say(processMessage(message.text))
                 .then(() => 'speak');
         }
     }
