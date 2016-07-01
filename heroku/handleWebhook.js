@@ -44,6 +44,7 @@ function handlePostback(req, res) {
 }
 
 function handleWebhook(req, res, next) {
+  console.log(req)
   const trigger = req.body.trigger
 
   console.log('JasonBot trigger:', trigger)
