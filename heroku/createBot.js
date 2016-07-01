@@ -4,6 +4,8 @@ const {
   MemoryLock
 } = require('smooch-bot')
 
+const jwt = require('./jwt')
+
 const {
   BOT_NAME,
   BOT_AVATAR_URL
