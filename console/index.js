@@ -1,74 +1,33 @@
-'use strict';
+const {
+  MemoryStore,
+  MemoryLock,
+  StateMachine
+} = require('smooch-bot')
 
-const smoochBot = require('smooch-bot');
-const MemoryStore = smoochBot.MemoryStore;
-const MemoryLock = smoochBot.MemoryLock;
-const Bot = smoochBot.Bot;
-const Script = smoochBot.Script;
-const StateMachine = smoochBot.StateMachine;
+const ConsoleBot = require('./ConsoleBot')
+const script = require('../lib/script')
 
-class ConsoleBot extends Bot {
-    constructor(options) {
-        super(options);
-    }
+const store = new MemoryStore()
+const lock = new MemoryLock()
 
-    say(text) {
-        return new Promise((resolve) => {
-            console.log(text);
-            resolve();
-        });
-    }
-}
-
-const script = new Script({
-    start: {
-        receive: (bot) => {
-            return bot.say('Hi! I\'m Smooch Bot!')
-                .then(() => 'askName');
-        }
-    },
-
-    askName: {
-        prompt: (bot) => bot.say('What\'s your name'),
-        receive: (bot, message) => {
-            const name = message.text.trim();
-            bot.setProp('name', name);
-            return bot.say(`I'll call you ${name}! Great!`)
-                .then(() => 'finish');
-        }
-    },
-
-    finish: {
-        receive: (bot, message) => {
-            return bot.getProp('name')
-                .then((name) => bot.say(`Sorry ${name}, my creator didn't ` +
-                        'teach me how to do anything else!'))
-                .then(() => 'finish');
-        }
-    }
-});
-
-const userId = 'testUserId';
-const store = new MemoryStore();
-const lock = new MemoryLock();
 const bot = new ConsoleBot({
-    store,
-    lock,
-    userId
-});
+  store,
+  lock,
+  userId: 'testUserId'
+})
 
 const stateMachine = new StateMachine({
-    script,
-    bot,
-    userId
-});
+  script,
+  bot
+})
 
-process.stdin.on('data', function(data) {
-    stateMachine.receiveMessage({
-        text: data.toString().trim()
+process.stdin.on('data', (data) => {
+  stateMachine
+    .receiveMessage({
+      text: data.toString().trim()
     })
-        .catch((err) => {
-            console.error(err);
-            console.error(err.stack);
-        });
-});
+    .catch((err) => {
+      console.error(err)
+      console.error(err.stack)
+    })
+})

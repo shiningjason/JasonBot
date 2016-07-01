@@ -2,7 +2,7 @@
   "name": "JasonBot",
   "version": "0.0.0",
   "description": "Hello, I'm JasonBot.",
-  "author": "jason Chung <shiningjason1989@gmail.com> (http://shiningjason1989.github.io/)",
+  "author": "Jason Chung <shiningjason1989@gmail.com> (http://shiningjason1989.github.io/)",
   "scripts": {
     "start": "node heroku"
   },
@@ -12,6 +12,8 @@
     "express": "^4.13.4",
     "hbs": "^4.0.0",
     "jsonwebtoken": "^5.7.0",
+    "node-uuid": "^1.4.7",
+    "node-wit": "^4.0.0",
     "smooch-bot": "^1.0.1",
     "smooch-core": "^0.0.15"
   },
