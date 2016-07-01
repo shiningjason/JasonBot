@@ -1,11 +1,7 @@
 const app = require('./app')
 const handleWebhook = require('./handleWebhook')
 
-app.post('/webhook', (req, res) => {
-  console.log('webhook')
-
-  handleWebhook(req, res)
-})
+app.post('/webhook', handleWebhook)
 
 const server = app.listen(process.env.PORT || 8000, () => {
   var host = server.address().address

@@ -43,11 +43,8 @@ function handlePostback(req, res) {
     .then(() => res.end())
 }
 
-function handleWebhook(req, res, next) {
-  console.log(req)
+function handleWebhook(req, res) {
   const trigger = req.body.trigger
-
-  console.log('JasonBot trigger:', trigger)
 
   switch (trigger) {
     case TRIGGER_MESSAGE_APPUSER:
