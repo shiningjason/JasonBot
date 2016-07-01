@@ -1,12 +1,12 @@
-var gulp = require('gulp');
-var nodemon = require('gulp-nodemon');
+const gulp = require('gulp')
+const nodemon = require('gulp-nodemon')
 
-gulp.task('heroku', function() {
-    nodemon({
-        script: 'heroku',
-        ext: 'js html',
-        env: {
-            'NODE_ENV': 'development'
-        }
-    });
-});
+gulp.task('heroku', () => {
+  nodemon({
+    script: 'heroku',
+    ext: 'js html',
+    env: {
+      'NODE_ENV': 'development'
+    }
+  })
+})
