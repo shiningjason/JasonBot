@@ -1,6 +1,6 @@
 const handleWebhook = require('./handleWebhook')
 
-const app = require('../app')
+const app = require('./app')
 
 app.post('/webhook', handleWebhook)
 
