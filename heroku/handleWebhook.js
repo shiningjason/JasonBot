@@ -46,7 +46,7 @@ function handlePostback(req, res) {
 function handleWebhook(req, res, next) {
   const trigger = req.body.trigger
 
-  console.debug('JasonBot trigger:', trigger)
+  console.log('JasonBot trigger:', trigger)
 
   switch (trigger) {
     case TRIGGER_MESSAGE_APPUSER:
