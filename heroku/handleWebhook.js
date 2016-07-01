@@ -5,9 +5,12 @@ const jwt = require('./jwt')
 const initWebhook = require('../lib/initWebhook')
 const script = require('../lib/script')
 
+const TRIGGER_MESSAGE_APPUSER = 'message:appUser'
+const TRIGGER_POSTBACK = 'postback'
+
 if (process.env.SERVICE_URL) {
   const target = process.env.SERVICE_URL.replace(/\/$/, '') + '/webhook'
-  initWebhook(jwt, target, ['message:appUser', 'postback'])
+  initWebhook(jwt, target, [TRIGGER_MESSAGE_APPUSER, TRIGGER_POSTBACK])
 }
 
 function handleMessages(req, res) {
@@ -25,7 +28,7 @@ function handleMessages(req, res) {
     .receiveMessage(messages[0])
     .then(() => res.end())
     .catch((err) => {
-      console.error('SmoochBot error:', err)
+      console.error('JasonBot error:', err)
       console.error(err.stack)
       res.end()
     })
@@ -44,11 +47,11 @@ function handleWebhook(req, res, next) {
   const trigger = req.body.trigger
 
   switch (trigger) {
-    case 'message:appUser':
+    case TRIGGER_MESSAGE_APPUSER:
       handleMessages(req, res)
       break
 
-    case 'postback':
+    case TRIGGER_POSTBACK:
       handlePostback(req, res)
       break
 
